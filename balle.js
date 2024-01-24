@@ -1,4 +1,4 @@
-           
+            
                   //ich könnte noch diabled designen!!!!
                 
                 
@@ -61,7 +61,7 @@
                     //ergebnisfeld
                     resultValuePrintField: document.getElementById("resultValue"),
                     EmmailButton: document.getElementById("EmmailButton"),
-                    NotAllowedClass: document.querySelector(".notallowedclass")
+                    NotAllowedClass: document.querySelectorAll(".notallowedclass")
                   };
                   const DOMAnpassungen = {
                     //if selected show das und das
@@ -187,13 +187,22 @@
                         DOMElemente.options.gedekBasicPlus.disabled = trueOrFalse;
                         DOMElemente.options.gedekPremium.disabled = trueOrFalse;
                         if (trueOrFalse){
-                          DOMElemente.options.gedekBlock.title = "Ist deaktiviert"
+                          DOMElemente.options.gedekBlock.title = "Ist deaktiviert";
                           //DOMElemente.options.gedekBlock.setAttribute('style', "cursor: not-allowed !important"); 
-                          DOMElemente.NotAllowedClass.style.cursor = "not-allowed"; 
+
+                          
+
+                          DOMElemente.NotAllowedClass.forEach(function(element) {
+                          // Hier kannst du Aktionen für jedes Element durchführen
+                          element.style.cursor = "not-allowed"; 
+                          });
                           //hier kann man dann auch noch css verndern
                         }else {
                           DOMElemente.options.gedekBlock.title = ""
-                          DOMElemente.NotAllowedClass.style.cursor = ""; 
+                          DOMElemente.NotAllowedClass.forEach(function(element) {
+                          // Hier kannst du Aktionen für jedes Element durchführen
+                          element.style.cursor = ""; 
+                          });
                 
                         }
                         
@@ -461,7 +470,7 @@
                     function sendMail() {
                       // Erstelle den E-Mail-Body
                       let emailBody = `
-                
+     
 Schreibe hier gerne einfach noch was hinein falls du anreungen Wünsche oder so hast.
 
 --------------------
@@ -490,7 +499,7 @@ Angegebene Anregungen: ${lastSonstNochWuensche}
 Preisspanne: ${formLogic.RenderResult()}
 
 --------------------
-                    
+         
                     
                      `;
                       // Öffne das E-Mail-Programm mit dem vorbereiteten Body
@@ -505,5 +514,4 @@ Preisspanne: ${formLogic.RenderResult()}
                     formLogic.RenderResult(); // Initialisierung des Ergebnisses, anfangs state nach reload Rendern
                   }
                   init();
-             
                 
