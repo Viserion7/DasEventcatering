@@ -1,7 +1,8 @@
 
+
   // aufgrund von inddividualiesirung kein ergebnis aber wir anterote gerne zurück
   //alle DOM Elemente
-  const DOMElemente = {
+ const DOMElemente = {
     //slider
     slider: {
       personen: document.getElementById("personen"),
@@ -16,8 +17,8 @@
     plainInputs: {
       name: document.getElementById("name"),
       datumDerVeranstaltung: document.getElementById("datumDerVeranstaltung"),
-      ortDerVeranstaltung: document.getElementById("ortDerVeranstaltung-2"), //-2
-      lastSonstNochWuensche: document.getElementById("lastSonstNochWuensche-2"), //-2
+      ortDerVeranstaltung: document.getElementById("ortDerVeranstaltung"), //-2..
+      lastSonstNochWuensche: document.getElementById("lastSonstNochWuensche"), //-2..
       buffetIndividuellInput: document.getElementById("buffetIndividuellInput"),
       menueIndividuellInput: document.getElementById("menueIndividuellInput")
     },
@@ -75,6 +76,14 @@
       longdrinksUndShots: document.getElementById("longdrinksUndShots"),
       sektEmpfang: document.getElementById("sektEmpfang"),
       kleineHaeppchen: document.getElementById("kleineHaeppchen"),
+    },
+    sliderKram: {
+      //ElementWelcheSlideAnIst: document.querySelector('.w-slider-aria-label'),
+      //der geht leider nicht musste ich unten anwenden weil er zu früh ladet
+      NextClickButtonImSlider: document.querySelector('.right-arrow-2.w-slider-arrow-right'),
+    },
+    mehrInfomration: {
+      //sind alle unten bei slider in der schleife aufgerufen
     },
     //ergebnisfeld
     resultValuePrintField: document.getElementById("resultValue"),
@@ -552,7 +561,51 @@
 
     DOMElemente.EmmailButton.addEventListener("click", submit);
 
+     //die slider eventlistener
+     // Event-Listener für jeden Button
+      for (let i = 1; i <= 6; i++) {
+          let buttonIdBuffet = `MehrInformationBuffet-${i}`;
+          let buttonMehrInformationBuffet = document.getElementById(buttonIdBuffet);
+
+          // Verwenden Sie eine sofort aufgerufene Pfeilfunktion, um den richtigen Index zu erfassen
+          buttonMehrInformationBuffet.addEventListener('click', ((index) => () => showSlide(index))(i));
+      }
+      // Event-Listener für jeden Button
+      for (let i = 1; i <= 7; i++) {
+          let buttonIdMenue = `MehrInformationMenue-${i}`;
+          let buttonMehrInformationMenue = document.getElementById(buttonIdMenue);
+
+          // Verwenden Sie eine sofort aufgerufene Pfeilfunktion, um den richtigen Index zu erfassen
+          buttonMehrInformationMenue.addEventListener('click', ((index) => () => showSlide(index))(i));
+      }
+
+
   }
+    
+// Funktion zum Anzeigen des gewünschten Slides
+function showSlide(slideNumber) {
+    // Das DOM-Element mit der Klasse '.w-slider-aria-label' auswählen
+    let element = document.querySelector('.w-slider-aria-label');
+
+    // Den Button aus dem DOM-Elemente-Objekt mit der Klasse 'NextClickButtonImSlider' auswählen
+    let button = DOMElemente.sliderKram.NextClickButtonImSlider;
+
+    // Den Textinhalt des ausgewählten Elements abrufen
+    let slideText = element.textContent;
+
+    // Die aktuelle Slide-Nummer extrahieren. Wenn kein Text vorhanden ist, standardmäßig auf Slide 1 setzen.
+    let currentSlide = slideText ? parseInt(slideText.match(/\d+/)[0]) : 1;
+
+    // Solange die aktuelle Slide-Nummer nicht der gewünschten Slide-Nummer entspricht, weiterklicken
+    while (currentSlide !== slideNumber) {
+        button.click(); // Klicken Sie auf den Button, um zum nächsten Slide zu wechseln
+        slideText = element.textContent; // Aktualisieren Sie den Textinhalt nach dem Klicken
+        currentSlide = slideText ? parseInt(slideText.match(/\d+/)[0]) : 1; // Aktualisieren Sie die aktuelle Slide-Nummer
+    }
+}
+
+
+
   function submit() {
     /* 
 wenn button auslösst
@@ -649,3 +702,4 @@ Preisspanne: ${formLogic.RenderResult()}
     formLogic.RenderResult(); // Initialisierung des Ergebnisses, anfangs state nach reload Rendern
   }
   init();
+
