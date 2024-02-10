@@ -269,7 +269,7 @@
                       // Überprüfen, ob beide Slider auf mindestens 1 gesetzt sind
                       //checke bei Gedek und Tischservice das erste siehe unten bei else
               
-                      if (selectedPersonen > selectedSitzendeGäste) {
+                      
                         // Überprüfen, ob mehr Personen als sitzende Gäste ausgewählt wurden
               
                         //deaktiviere alle optionen
@@ -334,18 +334,7 @@
                           // ...
                         }
 
-                      } else {
-                        if (selectedSitzendeGäste > 2000) {
-                          //den sitzenden slider max auf 2000 stellen
-                          DOMElemente.slider.sitzendeGäste.max = 2000;
-                          alert("Zu viele Sitzplätze ausgewählt");
-                          console.log("Zu viele Sitzplätze ausgewählt");
-              
-                          //warum geht er hir nicht rein
-                        }
-                        console.log(selectedSitzendeGäste);
-                        //nur wenns ganz rechts ist check ich nicht
-                      }
+                      
                     } else {
                       //deaktiviere alle optionen wenn nicht alle slider ausgewällt sind
                       alleGedekeDiablenOrNot(true);
@@ -552,5 +541,4 @@ Preisspanne: ${formLogic.RenderResult()}
                   formLogic.RenderResult(); // Initialisierung des Ergebnisses, anfangs state nach reload Rendern
                 }
                 init();
-              
-   
+    
