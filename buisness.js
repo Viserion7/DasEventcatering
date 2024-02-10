@@ -2,7 +2,7 @@
 
   // aufgrund von inddividualiesirung kein ergebnis aber wir anterote gerne zurück
   //alle DOM Elemente
- const DOMElemente = {
+  const DOMElemente = {
     //slider
     slider: {
       personen: document.getElementById("personen"),
@@ -568,7 +568,7 @@
           let buttonMehrInformationBuffet = document.getElementById(buttonIdBuffet);
 
           // Verwenden Sie eine sofort aufgerufene Pfeilfunktion, um den richtigen Index zu erfassen
-          buttonMehrInformationBuffet.addEventListener('click', ((index) => () => showSlide(index))(i));
+          buttonMehrInformationBuffet.addEventListener('click', ((index) => () => showSlideBuffet(index))(i));
       }
       // Event-Listener für jeden Button
       for (let i = 1; i <= 7; i++) {
@@ -576,14 +576,14 @@
           let buttonMehrInformationMenue = document.getElementById(buttonIdMenue);
 
           // Verwenden Sie eine sofort aufgerufene Pfeilfunktion, um den richtigen Index zu erfassen
-          buttonMehrInformationMenue.addEventListener('click', ((index) => () => showSlide(index))(i));
+          buttonMehrInformationMenue.addEventListener('click', ((index) => () => showSlideMenue(index))(i));
       }
 
 
   }
     
 // Funktion zum Anzeigen des gewünschten Slides
-function showSlide(slideNumber) {
+function showSlideBuffet(slideNumber) {
     // Das DOM-Element mit der Klasse '.w-slider-aria-label' auswählen
     let element = document.querySelector('.w-slider-aria-label');
 
@@ -603,6 +603,34 @@ function showSlide(slideNumber) {
         currentSlide = slideText ? parseInt(slideText.match(/\d+/)[0]) : 1; // Aktualisieren Sie die aktuelle Slide-Nummer
     }
 }
+// Funktion zum Anzeigen des gewünschten Slides
+function showSlideMenue(slideNumber) {
+    console.log("hier rein")
+    // Das DOM-Element mit der Klasse '.w-slider-aria-label' auswählen das wzeite
+    let zweistesElement = document.querySelectorAll('.w-slider-aria-label');
+
+
+    let element = zweistesElement[1]
+    // Den Button aus dem DOM-Elemente-Objekt mit der Klasse 'NextClickButtonImSlider' auswählen
+    let button = document.getElementsByClassName('right-arrow-2')[1];
+
+
+    // Den Textinhalt des ausgewählten Elements abrufen
+    let slideText = element.textContent;
+
+    // Die aktuelle Slide-Nummer extrahieren. Wenn kein Text vorhanden ist, standardmäßig auf Slide 1 setzen.
+    let currentSlide = slideText ? parseInt(slideText.match(/\d+/)[0]) : 1;
+
+    // Solange die aktuelle Slide-Nummer nicht der gewünschten Slide-Nummer entspricht, weiterklicken
+    while (currentSlide !== slideNumber) {
+      console.log("so oft das hängt?")
+        button.click(); // Klicken Sie auf den Button, um zum nächsten Slide zu wechseln
+        slideText = element.textContent; // Aktualisieren Sie den Textinhalt nach dem Klicken
+        currentSlide = slideText ? parseInt(slideText.match(/\d+/)[0]) : 1; // Aktualisieren Sie die aktuelle Slide-Nummer
+    }
+}
+
+
 
 
 
@@ -703,3 +731,4 @@ Preisspanne: ${formLogic.RenderResult()}
   }
   init();
 
+ 
