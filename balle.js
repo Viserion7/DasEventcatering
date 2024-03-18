@@ -221,7 +221,7 @@ const formLogic = {
       DOMElemente.options.tischserivceBasic.disabled = trueOrFalse;
       DOMElemente.options.tischserivcePremium.disabled = trueOrFalse;
       if (trueOrFalse){
-        DOMElemente.options.tischserivceBlock.title = "Ist deaktiviert"
+        DOMElemente.options.tischserivceBlock.title = "Diese Option ist deaktiviert, füge zuerst sitzende Gäste hinzu"
         //hier kann man dann auch noch css verndern
       }else {
         DOMElemente.options.tischserivceBlock.title = ""
