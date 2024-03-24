@@ -387,8 +387,18 @@ const formLogic = {
     const untergrenze = Math.ceil(this.calculateResult() * 0.9);
     const obergrenze = Math.ceil(this.calculateResult() * 1.1);
 
-    resultElement.innerHTML = " " + untergrenze + "€ - " + obergrenze + "€*";
-    return untergrenze + "€ - " + obergrenze + "€";
+    //runden letzte stelle null
+    function rundeZurZehnerstelle(zahl) {
+            // Prüfen, ob die Zahl bereits eine einzelne Ziffer ist
+            if (zahl >= 0 && zahl < 10) {
+              return zahl;
+            }
+            // Abrunden oder aufrunden zur nächsten Zehnerstelle, abhängig von der letzten Ziffer
+            return Math.round(zahl / 10) * 10;
+          }
+
+    resultElement.innerHTML = " " + rundeZurZehnerstelle(untergrenze) + "€ - " + rundeZurZehnerstelle(obergrenze) + "€*";
+    return rundeZurZehnerstelle(untergrenze) + "€ - " + rundeZurZehnerstelle(obergrenze) + "€*";
   },
 };
 // Funktion zur Aktualisierung des Ergebnisses bei Änderungen
