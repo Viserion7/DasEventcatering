@@ -567,7 +567,7 @@ Preisspanne: ${formLogic.RenderResult()}
    `;
     // Öffne das E-Mail-Programm mit dem vorbereiteten Body
     window.location.href =
-      "mailto:office@das-eventcatering.at?subject=Das Eventcatering - Ballanfrage&body=" +
+      "mailto:office@das-eventcatering.at?subject=Das Eventcatering - Anfrage für Ballcatering&body=" +
       encodeURIComponent(emailBody);
   }
   sendMail();
