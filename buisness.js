@@ -98,7 +98,9 @@ const DOMAnpassungen = {
     } else if (was === "Menue") {
       DOMElemente.options.buffetBlock.style.display = "none";
       DOMElemente.options.menueBlock.style.display = "block";
-    } else console.log("nichts ausgewählt vom paket");
+    } else {
+//console.log("nichts ausgewählt vom paket");
+    }
   },
 
   //if selected show das und das
@@ -323,7 +325,7 @@ const formLogic = {
         //wenn Buffet an ist
         const buffetValue = GeckecktesBuffet.value;
         this.individualisierung = false;
-        console.log(buffetValue)
+        //console.log(buffetValue)
         if (buffetValue === DOMElemente.options.buffetBasic.value) {
           this.welchesBuffet = "Basic Buffet";
           preisProPerson(werte.buffetBasic.Preis)
@@ -357,8 +359,9 @@ const formLogic = {
           buffetValue === DOMElemente.options.buffetIndividuell.value
         ) {
           this.welchesBuffet = "Individuelles Buffet";
-          this.welcheIndividualisierung = "buffetIndividuell"
-          console.log("indivi an")
+          this.welcheIndividualisierung = "buffetIndividuell";
+          this.individualisierung = true;
+          //console.log("indivi an")
           
           
         }
@@ -414,7 +417,7 @@ const formLogic = {
 
     if (this.kaffee) {
       //wenn kaffee ausgeählt ist
-      console.log("kaffee")
+      //console.log("kaffee")
       preisMalPersonUndStunde(werte.kaffee.Preis)
     }
 
@@ -436,17 +439,17 @@ const formLogic = {
       
       if(this.longdrinksUndShots){
         //wenn beides ausgewählt ist tu nichts
-        console.log("mach nichts")
+        //console.log("mach nichts")
       }else{
         //wenn nur energy ausgeählt ist
-        console.log("nur energy")
+        //console.log("nur energy")
         preisMalPersonUndStunde(werte.energy.Preis)
       }
     }
 
     if (this.sektEmpfang) {
       //wenn sektempfang ausgeählt ist
-      console.log("sektempfang")
+      //console.log("sektempfang")
 
       //zeige sektSlider
       DOMElemente.bloecke.sektPersonenBlock.style.display = "block";
@@ -458,7 +461,7 @@ const formLogic = {
 
     if (this.kleineHaeppchen) {
       //wenn kleineHaeppchen ausgeählt ist
-      console.log("kleinhäpchen")
+      //console.log("kleinhäpchen")
       preisProPerson(werte.kleineHaeppchen.Preis)
     }
 
@@ -497,8 +500,8 @@ const formLogic = {
     const obergrenzeProPerson = Math.ceil((this.calculateResult() * 1.1)/formLogic.personen);
     let ergebnis;
     if(formLogic.individualisierung){
-      resultElement.innerHTML = `Leider kein Ergebnis aufgrund Individualisierung, aber wir treten gerne in verbindung`;
-      ergebnis = "Kein Ergebnis aufgrund Individualisierung"
+      resultElement.innerHTML = `Für das individuelle Paket können wir erst nach Rücksprache eine Preisspanne nennen`;
+      ergebnis = "Für das individuelle Paket können wir erst nach Rücksprache eine Preisspanne nennen"
     }
     else if (this.personen < 100) {
       resultElement.innerHTML = `${untergrenze}€ - ${obergrenze}€*`;
@@ -610,7 +613,7 @@ function showSlideBuffet(slideNumber) {
 }
 // Funktion zum Anzeigen des gewünschten Slides
 function showSlideMenue(slideNumber) {
-  console.log("hier rein")
+  //console.log("hier rein")
   // Das DOM-Element mit der Klasse '.w-slider-aria-label' auswählen das wzeite
   let zweistesElement = document.querySelectorAll('.w-slider-aria-label');
 
@@ -628,7 +631,7 @@ function showSlideMenue(slideNumber) {
 
   // Solange die aktuelle Slide-Nummer nicht der gewünschten Slide-Nummer entspricht, weiterklicken
   while (currentSlide !== slideNumber) {
-    console.log("so oft das hängt?")
+    //console.log("so oft das hängt?")
       button.click(); // Klicken Sie auf den Button, um zum nächsten Slide zu wechseln
       slideText = element.textContent; // Aktualisieren Sie den Textinhalt nach dem Klicken
       currentSlide = slideText ? parseInt(slideText.match(/\d+/)[0]) : 1; // Aktualisieren Sie die aktuelle Slide-Nummer
@@ -749,7 +752,7 @@ Preisspanne: ${formLogic.RenderResult()}
    `;
     // Öffne das E-Mail-Programm mit dem vorbereiteten Body
     window.location.href =
-      "mailto:office@das-eventcatering.at?subject=Das Eventcatering - Ballanfrage&body=" +
+      "mailto:office@das-eventcatering.at?subject=Das Eventcatering - Anfrage für Business&body=" +
       encodeURIComponent(emailBody);
   }
   sendMail();
