@@ -36,11 +36,13 @@ const DOMElemente = {
     //GEDEK Group
     Gedek: document.getElementsByName("Gedek"),
     gedekBlock: document.getElementById("gedekBlock"),
+    hoverToolTipGedek: document.getElementById("hover-tool-tip-gedek"),
 
     //gedek
     gedekBasic: document.getElementById("gedekBasic"),
     gedekBasicPlus: document.getElementById("gedekBasicPlus"),
     gedekPremium: document.getElementById("gedekPremium"),
+      gedekKeins: document.getElementById("gedekKeins"),
 
     //TISCHERSERVICE  Group
     Tischserivce: document.getElementsByName("Tischserivce"),
@@ -49,6 +51,7 @@ const DOMElemente = {
     //tischservice
     tischserivceBasic: document.getElementById("tischserivceBasic"),
     tischserivcePremium: document.getElementById("tischserivcePremium"),
+     tischserivceKeins: document.getElementById("tischserivceKeins"),
   },
   //checkpoints
   checkboxes: {
@@ -196,10 +199,12 @@ const formLogic = {
       DOMElemente.options.gedekBasic.disabled = trueOrFalse;
       DOMElemente.options.gedekBasicPlus.disabled = trueOrFalse;
       DOMElemente.options.gedekPremium.disabled = trueOrFalse;
+      DOMElemente.options.gedekKeins.disabled = trueOrFalse;
       if (trueOrFalse){
         DOMElemente.options.gedekBlock.title = "Diese Option ist deaktiviert, füge zuerst sitzende Gäste hinzu";
         //DOMElemente.options.gedekBlock.setAttribute('style', "cursor: not-allowed !important"); 
-
+        DOMElemente.options.gedekBlock.style.opacity = "40%" // ausgrauen
+        DOMElemente.options.hoverToolTipGedek.style.visibility = 'hidden';
         
 
         DOMElemente.NotAllowedClass.forEach(function(element) {
@@ -208,7 +213,9 @@ const formLogic = {
         });
         //hier kann man dann auch noch css verndern
       }else {
-        DOMElemente.options.gedekBlock.title = ""
+        DOMElemente.options.gedekBlock.title = "";
+        DOMElemente.options.gedekBlock.style.opacity = "100%" 
+        DOMElemente.options.hoverToolTipGedek.style.visibility = 'visible';
         DOMElemente.NotAllowedClass.forEach(function(element) {
         // Hier kannst du Aktionen für jedes Element durchführen
         element.style.cursor = ""; 
@@ -220,11 +227,14 @@ const formLogic = {
     function alleTischserviceDiablenOrNot(trueOrFalse) {
       DOMElemente.options.tischserivceBasic.disabled = trueOrFalse;
       DOMElemente.options.tischserivcePremium.disabled = trueOrFalse;
+      DOMElemente.options.tischserivceKeins.disabled = trueOrFalse;
       if (trueOrFalse){
         DOMElemente.options.tischserivceBlock.title = "Diese Option ist deaktiviert, füge zuerst sitzende Gäste hinzu"
         //hier kann man dann auch noch css verndern
+        DOMElemente.options.tischserivceBlock.style.opacity = "40%";
       }else {
-        DOMElemente.options.tischserivceBlock.title = ""
+        DOMElemente.options.tischserivceBlock.title = "";
+        DOMElemente.options.tischserivceBlock.style.opacity = "100%"
 
       }
     }
@@ -282,10 +292,10 @@ const formLogic = {
           const gedekValue = GeckecktesGedek.value;
           const tischserviceValue = GeckecktesTischservice.value;
 
-          if (gedekValue === DOMElemente.options.gedekBasicPlus.value && 
+          if (gedekValue === DOMElemente.options.gedekBasic.value && 
               tischserviceValue === DOMElemente.options.tischserivceBasic.value) {
             // Spezielle Berechnung für Gedek Basic Plus und Tischservice Basic
-            this.welchesGedek = "Basic + -> Combo";
+            this.welchesGedek = "Basic -> Combo";
             this.welcherTischservice = "Basic -> Combo";
             mathLogicSitzend(werte.CombogedekBasicPlusTischserivceBasic.durchProVielePersonen, werte.CombogedekBasicPlusTischserivceBasic.durchProVielePersonen)
             //spiele combo animation ab
@@ -310,7 +320,11 @@ const formLogic = {
                 werte.gedekPremium.durchProVielePersonen,
                 werte.gedekPremium.Preis
               );
-            }
+            }else if(gedekValue === DOMElemente.options.gedekKeins.value) {
+              this.welchesGedek = "Kein Gedeck";
+               result += 0;
+             
+           }
 
             if (
               tischserviceValue === DOMElemente.options.tischserivceBasic.value
@@ -320,12 +334,15 @@ const formLogic = {
                 werte.tischserivceBasic.durchProVielePersonen,
                 werte.tischserivceBasic.Preis
               );
-            } else {
+            } else if(tischserviceValue === DOMElemente.options.tischserivcePremium.value){
               this.welcherTischservice = "Premium";
               mathLogicSitzend(
                 werte.tischserivcePremium.durchProVielePersonen,
                 werte.tischserivcePremium.Preis
               );
+            }else if (tischserviceValue === DOMElemente.options.tischserivceKeins.value) {
+              this.welcherTischservice = "Kein Tischserivce";
+              result += 0;
             }
           }
         } else {
