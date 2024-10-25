@@ -37,6 +37,7 @@ const DOMElemente = {
     Gedek: document.getElementsByName("Gedek"),
     gedekBlock: document.getElementById("gedekBlock"),
     hoverToolTipGedek: document.getElementById("hover-tool-tip-gedek"),
+    hoverToolTipTischservice: document.getElementById("hover-tool-tip-tischservice"),
 
     //gedek
     gedekBasic: document.getElementById("gedekBasic"),
@@ -204,7 +205,8 @@ const formLogic = {
         DOMElemente.options.gedekBlock.title = "Diese Option ist deaktiviert, füge zuerst sitzende Gäste hinzu";
         //DOMElemente.options.gedekBlock.setAttribute('style', "cursor: not-allowed !important"); 
         DOMElemente.options.gedekBlock.style.opacity = "40%" // ausgrauen
-        DOMElemente.options.hoverToolTipGedek.style.visibility = 'hidden';
+        DOMElemente.options.hoverToolTipGedek.style.visibility = 'visible'; 
+        DOMElemente.options.hoverToolTipTischservice.style.visibility = 'visible'; 
         
 
         DOMElemente.NotAllowedClass.forEach(function(element) {
@@ -215,7 +217,8 @@ const formLogic = {
       }else {
         DOMElemente.options.gedekBlock.title = "";
         DOMElemente.options.gedekBlock.style.opacity = "100%" 
-        DOMElemente.options.hoverToolTipGedek.style.visibility = 'visible';
+        DOMElemente.options.hoverToolTipGedek.style.visibility = 'hidden';
+        DOMElemente.options.hoverToolTipTischservice.style.visibility = 'hidden'; 
         DOMElemente.NotAllowedClass.forEach(function(element) {
         // Hier kannst du Aktionen für jedes Element durchführen
         element.style.cursor = ""; 
